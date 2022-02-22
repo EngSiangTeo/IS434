@@ -25,8 +25,8 @@ export default {
   },
   data(){
     return {
-      colours: ["red", "green", "blue", "yellow"],
-      c_index: [0,1,2,3],
+      colours: [],
+      c_index: [],
       componentKey: 0,
       type: "degree",
       data: Object
@@ -37,6 +37,8 @@ export default {
       const res = await fetch(process.env.VUE_APP_BE_SERVER_HOST + "/")
       this.data = await res.json()
       console.log(this.data)
+      this.colours = this.data.colours
+      this.c_index = this.data.c_index
     } catch (e) {
       console.error(e)
     }

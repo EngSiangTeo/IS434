@@ -11,22 +11,13 @@
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import * as vNG from "v-network-graph"
 
 export default {
   name: 'AsyncNetworkGraph',
   async setup() {
-    const data = ref(null)
     await new Promise((r) => setTimeout(r, 2000))
-    try {
-      const res = await fetch(process.env.VUE_APP_BE_SERVER_HOST + "/")
-      data.value = await res.json()
-      console.log(data.value)
-    } catch (e) {
-      console.error(e)
-    }
-    return { data }
   },
   data() {
     return {
@@ -36,7 +27,8 @@ export default {
   },
   props: {
     currentColours: Object,
-    type: String
+    type: String,
+    data: Object
   },
   created(){
     this.filterNode()

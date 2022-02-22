@@ -1,9 +1,5 @@
 <template>
   <!-- <pre>{{ data.nodes }}</pre> -->
-  <button @click="flip('degree')">Degree</button>
-  <button @click="flip('eigenvector')">Eigenvector</button>
-  <button @click="flip('betweeness')">Betweeness</button>
-  <button @click="reset">Test</button>
   <v-network-graph
     :nodes="filterNodes"
     :edges="data.edges"
@@ -39,10 +35,12 @@ export default {
     }
   },
   props: {
-    currentColours: Object
+    currentColours: Object,
+    type: String
   },
   created(){
     this.filterNode()
+    this.flip(this.type)
   },
   methods:{
     setUpConfigs : function(type="degree"){
@@ -73,7 +71,6 @@ export default {
       )
     },
     flip : function(type){
-      console.log(this.currentColours)
       this.configs = this.setUpConfigs(type)
     },
     filterNode: function(){
@@ -84,9 +81,6 @@ export default {
         }
       }
       this.filterNodes = obj
-    },
-    reset : function(){
-      this.filterNodes = this.data.nodes
     }
   }
 }
